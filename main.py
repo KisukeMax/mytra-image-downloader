@@ -43,7 +43,7 @@ def scraper(sku, prod_url, df, index):
         try:
             images = json_object.get("pdpData").get("media").get("albums")[0].get("images")
             for i, img in enumerate(images):
-                img_url = img.get("src")
+                img_url = img.get("src").replace("($height)", "2000").replace("($width)", "2000")
                 download_image(img_url,"images",sku,i+1)
                 df.at[index, f'Image {i+1}'] = img_url
         except:
